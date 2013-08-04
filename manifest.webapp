@@ -1,0 +1,9 @@
+{
+    "name": "boilerplate",
+    "launch_path" : "./index.html",
+    "version": "1",
+    "developer": {
+        "name": "Marco Aurelio",
+        "url": "https://m2arkiWEB.com"
+    }
+}

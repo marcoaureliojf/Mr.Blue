@@ -5,7 +5,7 @@ game.PlayScreen = me.ScreenObject.extend({
         // coisas para resetar ao mudar de estado
         // carrega o nivel
         //me.levelDirector.loadLevel("area01"); // mapa
-        me.levelDirector.loadLevel("area02"); // mapa
+        me.levelDirector.loadLevel("area01"); // mapa
 
         // placar padrão
         me.game.addHUD(0, 40, 640, 60);

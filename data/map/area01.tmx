@@ -24,6 +24,7 @@
  <objectgroup name="player1" width="30" height="20">
   <object name="player1" x="352" y="32" width="28" height="63">
    <properties>
+    <property name="canBreakTile" value="true"/>
     <property name="image" value="gripe_run_right"/>
     <property name="spritewidth" value="64"/>
    </properties>

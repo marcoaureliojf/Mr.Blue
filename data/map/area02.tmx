@@ -29,6 +29,7 @@
  <objectgroup name="player1" width="40" height="30">
   <object name="player1" x="1152" y="736" width="28" height="63">
    <properties>
+    <property name="canBreakTile" value="true"/>
     <property name="image" value="gripe_run_right"/>
     <property name="spritewidth" value="64"/>
    </properties>
@@ -205,11 +206,11 @@
    </properties>
    <ellipse/>
   </object>
-  <object name="me.LevelEntity" x="1184" y="352" width="57" height="50">
+  <object name="me.LevelEntity" x="1184" y="576" width="57" height="50">
    <properties>
     <property name="duration" value="300"/>
     <property name="fade" value="#000000"/>
-    <property name="to" value="area02"/>
+    <property name="to" value="area01"/>
    </properties>
   </object>
  </objectgroup>

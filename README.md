@@ -1,4 +1,14 @@
 Mr.Blue
 =======
 
-Mr.Blue desenvolvido com Html5 canvas, melonJS javascript framewaork e Tiled Map Editor 
+Mr.Blue desenvolvido com Html5 canvas, melonJS javascript framework e Tiled Map Editor 
+--------------------------
+
+Instruções:
+
+Direita, Esquerda : Setas direcionais do teclaado.
+Pular : Tecla de espaço.
+
+Jogar online: www.bluefestasjf.hol.es/game
+---------------------------
+ 

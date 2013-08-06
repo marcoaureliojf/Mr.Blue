@@ -1,6 +1,11 @@
 /*------------------- 
 Entidade PLAYER
 -------------------------------- */
+
+
+
+var parcial = 0;
+
 game.PlayerEntity = me.ObjectEntity.extend({
  
     /* -----
@@ -8,10 +13,14 @@ game.PlayerEntity = me.ObjectEntity.extend({
     construtor
  
     ------ */
+    
  
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+
+        
+        parcial = 0;
 
         // player pode sair fora do viewport (cair num buraco, saltar fora da tela)
         this.alwaysUpdate = true;
@@ -35,6 +44,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
     atualiza posição do player
  
     ------ */
+
+
+
     update: function() {
  
         if (me.input.isKeyPressed('left')) {
@@ -80,11 +92,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
             }
  
         }
- 
-        
 
-
-        // verifica se caiu em um buraco
+        // verifica se caiu em buraco
         if (!this.inViewport && (this.pos.y > me.video.getHeight())) {
             // se caiu, reinicia a nivel
             me.game.remove(this);
@@ -93,6 +102,16 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 me.levelDirector.reloadLevel();
                 me.game.viewport.fadeOut('#fff', 150);
             });
+             // faz piscar
+                this.renderable.flicker(45);
+                // atualiza o placar
+                if(me.game.HUD.getItemValue("score") > 10){
+                    //parcial = parcial - 10;
+                    me.game.HUD.updateItemValue("score", -parcial);
+                    parcial = 0;
+                }else{
+                    me.game.HUD.setItemValue("score", 0);
+                }
             return true;
         }
 
@@ -116,15 +135,26 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
                 // play some audio
             me.audio.play("stomp");
-
-                // ganha 300 pontos por pular no inimigo
-            me.game.HUD.updateItemValue("score", 250);
- 
             } else {
-                // let's flicker in case we touched an enemy
-                this.renderable.flicker(45);
 
-                me.game.HUD.updateItemValue("score", -10);
+                //me.game.remove(this);
+
+                // let's flicker in case we touched an enemy
+                me.game.viewport.fadeIn('#fff', 150, function(){
+                me.levelDirector.reloadLevel();
+                me.game.viewport.fadeOut('#fff', 150);
+                });
+                // faz piscar
+                this.renderable.flicker(45);
+                // atualiza o placar
+                if(me.game.HUD.getItemValue("score") > 10){
+                    //parcial = parcial - 10;
+                    me.game.HUD.updateItemValue("score", -parcial);
+                    parcial = 0;
+                }else{
+                    me.game.HUD.setItemValue("score", 0);
+                }
+                
             }
         }
     }
@@ -142,84 +172,6 @@ game.PlayerEntity = me.ObjectEntity.extend({
     }
  
 });
-
-
-/*----------------
- Elevador
------------------------- */
-game.PlatformEntity = me.ObjectEntity.extend({
-    // extending the init function is not mandatory
-    // unless you need to add some extra initialization
-    init: function(x, y, settings) {
-        // call the parent constructor
-        this.parent(x, y, settings);
-
-        this.startY = y;
-        this.endY = y + settings.height - settings.spriteheight;
-        // size of sprite
- 
-        // make him start from the right
-        this.pos.y = y + settings.height - settings.spriteheight;
-        this.moveUp = true;
-
-        
- 
-        // moving speed
-        this.setVelocity(4, 6);
- 
-        // make it collidable
-        this.collidable = true;
-
-
-
-    },
- 
-    // this function is called by the engine, when
-    // an object is touched by something (here collected)
-    onCollision: function() {
-        
-    },
-
-    update: function() {
-        // do nothing if not in viewport
-        if (!this.inViewport)
-            return false;
- 
-        if (this.alive) {
-            if (this.moveUp && this.pos.y <= this.startY) {
-                this.moveUp = false;
-            } else if (!this.moveUp && this.pos.y >= this.endY) {
-                this.moveUp = true;
-            }
-            // subir
-            this.flipY(this.moveUp);
-            this.vel.y += (this.moveUp) ? -this.accel.y * me.timer.tick : this.accel.y * me.timer.tick;
-                 
-        } else {
-            this.vel.y = 0;
-        }
-         
-        // check and update movement
-        this.updateMovement();
-         
-        // update animation if necessary
-        if (this.vel.y!=0 || this.vel.x!=0) {
-            // update object animation
-            this.parent();
-            return true;
-        }
-        return false;
-    }
-
-
-
- 
-});
-
-
-
-
-
 
 
 /*----------------
@@ -247,6 +199,7 @@ game.CoinEntity = me.CollectableEntity.extend({
         me.game.remove(this);
 
         // ganha 250 pontos por moeda
+        parcial = parcial + 250;
         me.game.HUD.updateItemValue("score", 250);
 
         // som quando pega moeda
@@ -254,6 +207,8 @@ game.CoinEntity = me.CollectableEntity.extend({
     }
  
 });
+
+
 
 /* --------------------------
 Entidade Inimigo
@@ -299,8 +254,11 @@ game.EnemyEntity = me.ObjectEntity.extend({
         // which mean at top position for this one
         if (this.alive && (res.y > 0) && obj.falling) {
             
-            try{this.renderable.flicker(45);}finally{me.game.remove(this);}
-
+            try{this.renderable.flicker(45);}finally{
+                 // ganha 300 pontos por pular no inimigo
+                parcial = parcial + 300;
+                me.game.HUD.updateItemValue("score", 300);
+                me.game.remove(this);}
             
         }
 
@@ -362,5 +320,7 @@ game.ScoreObject = me.HUD_Item.extend({
     draw: function(context, x, y) {
         this.font.draw(context, this.value, this.pos.x + x, this.pos.y + y);
     }
+
+
  
 });

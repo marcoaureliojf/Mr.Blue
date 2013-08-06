@@ -7,7 +7,7 @@ game.resources = [
     {name: "area01_level_tiles",  type:"image", src: "data/img/map/area01_level_tiles.png"},
 
     // nosso player 1
-    {name: "gripe_run_right", type:"image", src: "data/img/sprite/gripe_run_right.png"},
+    {name: "justin_direita", type:"image", src: "data/img/sprite/justin_direita.png"},
 
         // nossas moedas
     {name: "spinning_coin_gold",  type:"image", src: "data/img/sprite/spinning_coin_gold.png"},
@@ -21,8 +21,9 @@ game.resources = [
     /* 
      * Mapas. 
      */
-    {name: "area02", type: "tmx", src: "data/map/area02.tmx"},
-    {name: "area01", type: "tmx", src: "data/map/area01.tmx"},
+    {name: "area02", type: "tmx", src: "data/map/level1/area02.tmx"},
+    {name: "area01", type: "tmx", src: "data/map/level1/area01.tmx"},
+    {name: "area03", type: "tmx", src: "data/map/level1/area03.tmx"},
 
 
      /* 

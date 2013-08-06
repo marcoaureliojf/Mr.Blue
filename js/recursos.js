@@ -9,6 +9,8 @@ game.resources = [
     // nosso player 1
     {name: "justin_direita", type:"image", src: "data/img/sprite/justin_direita.png"},
 
+    {name: "justin_mortal", type:"image", src: "data/img/sprite/justin_mortal.png"},
+
         // nossas moedas
     {name: "spinning_coin_gold",  type:"image", src: "data/img/sprite/spinning_coin_gold.png"},
 
@@ -17,6 +19,11 @@ game.resources = [
 
     // Nossa tela de inicio
     {name: "title_screen",       type:"image", src: "data/img/gui/title_screen.png"},
+
+    // plano de fundo
+    {name: "area01_bkg0",         type:"image", src: "data/img/map/area01_bkg0.jpg"},
+    {name: "area01_bkg1",         type:"image", src: "data/img/map/area01_bkg1.png"},
+    {name: "area01_bkg2",         type:"image", src: "data/img/map/area01_bkg2.png"},
      
     /* 
      * Mapas. 

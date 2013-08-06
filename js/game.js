@@ -48,7 +48,9 @@ var game = {
 
             // adiciono meu jogador
        me.entityPool.add("player1", game.PlayerEntity);
+       // adiciono minha moeda
        me.entityPool.add("CoinEntity", game.CoinEntity);
+       // adiciono meu inimigo
        me.entityPool.add("EnemyEntity", game.EnemyEntity);
              
    // habilito o teclado
@@ -58,6 +60,29 @@ var game = {
    me.input.bindKey(me.input.KEY.D, "right");
    me.input.bindKey(me.input.KEY.SPACE, "jump", true);
  
+        
+
+   me.state.onPause = function ()
+      {
+         // get the current context
+         var context = me.video.getScreenContext();
+         //draw a black transparent square
+         context.fillStyle = "rgba(0, 0, 0, 0.8)";
+         context.fillRect(0, (me.video.getHeight()/2) - 30, me.video.getWidth(), 60);
+         
+         // create a font
+         var font = new me.BitmapFont("32x32_font", 32);
+         font.set("left");
+
+         // a draw "pause" ! 
+         var measure = font.measureText("P A U S E");
+         font.draw (context, "P A U S E", (me.video.getWidth()/2) - (measure.width/2) , (me.video.getHeight()/2) - (measure.height/2));
+         
+
+      };
+
+
+
         // game start.
         // me.state.change(me.state.PLAY);
 

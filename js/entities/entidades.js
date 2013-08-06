@@ -19,6 +19,10 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // call the constructor
         this.parent(x, y, settings);
 
+        this.renderable.addAnimation("caminhar", [0, 1, 2, 3], 2);
+        this.renderable.addAnimation("mortal", [0, 1, 2, 3], 2);
+        this.renderable.setCurrentAnimation("caminhar");
+
         
         parcial = 0;
 
@@ -29,7 +33,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.setVelocity(3, 15);
 
         // permite salto multiplo
-        // this.mutipleJump = 1;
+        this.mutipleJump = 1;
 
         // corrige o espaço ocupado pela entidade
         this.updateColRect(8, 42, -1, 0);
@@ -52,45 +56,56 @@ game.PlayerEntity = me.ObjectEntity.extend({
         if (me.input.isKeyPressed('left')) {
             // flip the sprite on horizontal axis
             this.flipX(true);
+
+            //this.renderable.setCurrentAnimation('caminhar');
             // update the entity velocity
             this.vel.x -= this.accel.x * me.timer.tick;
         } else if (me.input.isKeyPressed('right')) {
             // unflip the sprite
             this.flipX(false);
+
+            //this.renderable.setCurrentAnimation('caminhar');
             // update the entity velocity
             this.vel.x += this.accel.x * me.timer.tick;
         } else {
             this.vel.x = 0;
         }
-        if (me.input.isKeyPressed('jump')) {
 
-            /*--------------------------------------------------------
+
+        if (me.input.isKeyPressed('jump')) {
             // salto multiplo
             this.jumping = true;
-
             // reset the dblJump flag if off the ground
             this.mutipleJump = (this.vel.y === 0)?1:this.mutipleJump;
-            
             if (this.mutipleJump<=2) {
                 // easy 'math' for double jump
                 this.vel.y -= (this.maxVel.y * this.mutipleJump++) * me.timer.tick;
+
                 me.audio.play("jump", false);
             }
-            ---------------------------------------------------------------*/
-
+            
             // make sure we are not already jumping or falling
             // salto simples
-            if (!this.jumping && !this.falling) {
+            // if (this.jumping && !this.falling) {
+                if (this.jumping) {
                 // set current vel to the maximum defined value
                 // gravity will then do the rest
-                this.vel.y = -this.maxVel.y * me.timer.tick;
+                //this.vel.y = -this.maxVel.y * me.timer.tick;
                 // set the jumping flag
-                this.jumping = true;
+                //this.jumping = true;
 
                 // play some audio 
-                me.audio.play("jump");
+                //me.audio.play("jump");
             }
- 
+
+        }
+
+        if(this.jumping){
+            this.renderable.image = me.loader.getImage("justin_mortal");
+            this.renderable.setCurrentAnimation('mortal');
+        }else{
+            this.renderable.image = me.loader.getImage("justin_direita");
+            this.renderable.setCurrentAnimation('caminhar');
         }
 
         // verifica se caiu em buraco
@@ -163,6 +178,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
         if (this.vel.x!=0 || this.vel.y!=0) {
             // update object animation
             this.parent();
+            
+
             return true;
         }
          

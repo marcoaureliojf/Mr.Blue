@@ -21,7 +21,7 @@ var game = {
 
 
         // inicializa o audio
-        me.audio.init("mp3");
+        me.audio.init("mp3,ogg");
 
         // retorno (callback) após carregar
         me.loader.onload = this.loaded.bind(this);
@@ -31,7 +31,8 @@ var game = {
 
         // Inicializa o framework melonJS 
         // me.state.change(me.state.LOADING);
-        // me.state.change(me.state.LOADING, new game.CustomLoadingScreen());
+        me.state.set(me.state.LOADING, new game.CustomLoadingScreen());
+        me.state.change(me.state.LOADING);
 
 
         // debug de renderização: descomente para ativar
@@ -71,6 +72,7 @@ var game = {
 
         me.state.onPause = function()
         {
+            me.audio.pauseTrack();
             // contexto atual
             var context = me.video.getScreenContext();
             //desenha retangulo preto
@@ -82,14 +84,9 @@ var game = {
             font.set("left");
 
             // escreve "PAUSE"
-            var measure = font.measureText("P A U S E");
-            font.draw(context, "P A U S E", (me.video.getWidth() / 2) - (measure.width / 2), (me.video.getHeight() / 2) - (measure.height / 2));
-
-
+            var tamanhoTexto = font.measureText("P A U S E");
+            font.draw(context, "P A U S E", (me.video.getWidth() / 2) - (tamanhoTexto.width / 2), (me.video.getHeight() / 2) - (tamanhoTexto.height / 2));
         };
-
-
-
         // game start.
         // me.state.change(me.state.PLAY);
 

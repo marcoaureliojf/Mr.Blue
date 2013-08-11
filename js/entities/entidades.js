@@ -112,7 +112,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
                     this.jumping = true;
                     this.renderable.image = me.loader.getImage("justin_mortal");
                     this.renderable.setCurrentAnimation('mortal');
-                    me.audio.play("jump");
+                    me.audio.play("jump", false);
                 }
             }
         }
@@ -162,7 +162,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
                     this.jumping = true;
 
                     // play some audio
-                    me.audio.play("stomp");
+                    me.audio.play("stomp", false);
                 } else {
 
                     // me.game.remove(this);
@@ -227,7 +227,7 @@ game.CoinEntity = me.CollectableEntity.extend({
         me.game.HUD.updateItemValue("score", 250);
 
         // som quando pega moeda
-        me.audio.play("cling");
+        me.audio.play("cling", false);
     }
 
 });
@@ -251,7 +251,7 @@ game.Habilidade = me.CollectableEntity.extend({
     onCollision: function() {
         // do something when collected
 
-        habilidades[0] = "salto duplo"
+        habilidades[0] = "salto duplo";
         // make sure it cannot be collected "again"
         this.collidable = false;
         // remove it
@@ -260,12 +260,13 @@ game.Habilidade = me.CollectableEntity.extend({
 
         me.game.HUD.addItem("mensagem", new game.LevelDisplay(50, 0));
         me.game.HUD.setItemValue("mensagem", "NOVA HABILIDADE: \n" + habilidades[0]);
-        me.audio.play("cling");
+        me.audio.play("cling", false);
 
-        window.setTimeout(
+
+        window.setTimeout(// tempo da mensagem na tela
                 function() {
                     me.game.HUD.removeItem("mensagem");
-                }, 5000
+                }, 5000 // 5000ms = 5 segundos
                 );
     }
 
@@ -495,6 +496,7 @@ game.LevelDisplay = me.HUD_Item.extend({
         this.parent(x, y);
         // create a font
         this.font = new me.Font("Arial", 20, "white", "left");
+
     },
     /*
      * -----
@@ -505,5 +507,10 @@ game.LevelDisplay = me.HUD_Item.extend({
      */
     draw: function(context, x, y) {
         this.font.draw(context, this.value, this.pos.x + x, this.pos.y + y);
+        this.tween = new me.Tween(this).to({x: 200}, 3000);
+        this.tween.easing(me.Tween.Easing.Bounce.EaseOut);
+        this.tween.start();
     }
+
+
 });

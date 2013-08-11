@@ -26,6 +26,8 @@ game.PlayScreen = me.ScreenObject.extend({
         me.levelDirector.loadLevel(level);
         me.game.sort();
         this.changeLevel();
+
+        return true;
     },
     getNivel: function() {
         return this.converteNivel(me.levelDirector.getCurrentLevelId());
@@ -42,21 +44,21 @@ game.PlayScreen = me.ScreenObject.extend({
     changeLevel: function() {
         // this.levelDisplay.reset("levelDisplay");
         // this.skillDisplay.reset('skillDisplay');
-
         var curLevel = this.getNivel();
         this.curlevel = this.getNivel();
         this.lastMusic = this.music;
         if (curLevel < 04) {
-            this.music = "DST-InertExponent";
-        } else if (curLevel > 03 && curLevel < 14) {
             this.music = "DST-Arch-Delerium_Ancient";
+        } else if (curLevel > 03 && curLevel < 14) {
+            this.music = "DST-InertExponent";
         } else {
             this.music = "tech";
         }
         if (this.lastMusic !== this.music) {
-            me.audio.stopTrack();
+            if (this.lastMusic !== "") {
+                me.audio.stopTrack();
+            }
             me.audio.playTrack(this.music);
-
         }
 
     },

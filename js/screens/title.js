@@ -76,7 +76,7 @@ game.TitleScreen = me.ScreenObject.extend({
     },
     // destroy function
     onDestroyEvent: function() {
-        me.audio.stopTrack();
+        me.audio.stopTrack("DST-5thStreet_Title");
         me.input.unbindKey(me.input.KEY.ENTER);
 
         //just in case

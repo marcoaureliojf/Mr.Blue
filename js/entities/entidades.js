@@ -1,5 +1,15 @@
 var parcial = 0;
 var habilidades = new Array();
+var joystick = new VirtualJoystick({
+    container: document.body,
+    strokeStyle: 'cyan'
+});
+joystick.addEventListener('touchStartValidation', function(event) {
+    var touch = event.changedTouches[0];
+    if (touch.pageX < window.innerWidth / 2)
+        return false;
+    return true
+});
 
 game.MudarNivel = me.LevelEntity.extend({
     init: function(x, y, settings) {
@@ -70,14 +80,14 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
 
 
-        if (me.input.isKeyPressed('left')) {
+        if (me.input.isKeyPressed('left') || joystick.left()) {
             // flip the sprite on horizontal axis
             this.flipX(true);
 
             // this.renderable.setCurrentAnimation('caminhar');
             // update the entity velocity
             this.vel.x -= this.accel.x * me.timer.tick;
-        } else if (me.input.isKeyPressed('right')) {
+        } else if (me.input.isKeyPressed('right') || joystick.right()) {
             // unflip the sprite
             this.flipX(false);
 

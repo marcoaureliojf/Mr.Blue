@@ -15,9 +15,21 @@ game.PlayScreen = me.ScreenObject.extend({
         // novo item no placar
         me.game.HUD.addItem("score", new game.ScoreObject(620, 0));
 
-
+        this.first = 0;
 
         this.startLevel("area01");
+
+        if (this.first == 0) {
+            me.game.HUD.addItem("mensagem", new game.LevelDisplay(50, 0));
+            me.game.HUD.setItemValue("mensagem", "Controles Basicos: \n\
+                                                    Setas direcionais: MOVER DIREITA; ESQUERDA \n\
+                                                     Tecla de espaco: PULAR");
+            window.setTimeout(// tempo da mensagem na tela
+                    function() {
+                        me.game.HUD.removeItem("mensagem");
+                    }, 7000 // 5000ms = 5 segundos
+                    );
+        }
 
         // me.audio.playTrack("DST-InertExponent"); // musica
     },
@@ -48,9 +60,9 @@ game.PlayScreen = me.ScreenObject.extend({
         this.curlevel = this.getNivel();
         this.lastMusic = this.music;
         if (curLevel < 04) {
-            this.music = "DST-Arch-Delerium_Ancient";
-        } else if (curLevel > 03 && curLevel < 14) {
             this.music = "DST-InertExponent";
+        } else if (curLevel > 03 && curLevel < 14) {
+            this.music = "DST-Arch-Delerium_Ancient";
         } else {
             this.music = "tech";
         }

@@ -37,6 +37,7 @@ game.TitleScreen = me.ScreenObject.extend({
         this.scrollover();
 
         me.input.bindKey(me.input.KEY.ENTER, "enter", true);
+        me.input.bindTouch(me.input.KEY.ENTER);
 
         // play something
         me.audio.playTrack("DST-5thStreet_Title");
@@ -78,6 +79,7 @@ game.TitleScreen = me.ScreenObject.extend({
     onDestroyEvent: function() {
         me.audio.stopTrack("DST-5thStreet_Title");
         me.input.unbindKey(me.input.KEY.ENTER);
+        me.input.unbindTouch();
 
         //just in case
         this.scrollertween1.stop();

@@ -67,6 +67,10 @@ var game = {
         me.input.bindKey(me.input.KEY.A, "left");
         me.input.bindKey(me.input.KEY.D, "right");
         me.input.bindKey(me.input.KEY.SPACE, "jump", true);
+        me.input.bindTouch(me.input.KEY.SPACE);
+//        me.input.bindTouch(me.input.KEY.LEFT);
+//        me.input.bindTouch(me.input.KEY.RIGHT);
+
 
 
 
@@ -97,14 +101,14 @@ var game = {
 };
 
 /*
- Isto é muito simples. Uma vez que a página é carregada, a função onload() é chamada, 
+ É muito simples. Uma vez que a página é carregada, a função onload() é chamada, 
  o display e o áudio é inicializado, e todos os recursos do jogo começam a carregar. 
  Também definimos um callback para ser chamado quando tudo está pronto para ser usado. 
  No retorno, nós definimos um novo estado, que será usado para o material de jogo, 
  juntamente com um objeto PlayScreen que vamos usar para gerenciar os evento de jogo 
  (reiniciar, etc ..).
  
- A única mudança que vamos fazer no modelo de projeto padrão é a determinar resolução de vídeo 
+ A única mudança que vamos fazer no modelo do projeto padrão é a determinar resolução de vídeo 
  com a função `me.video.init ()`, para o tutorial, vamos criar uma tela de 640x480. 
  Você vai notar bem mais tarde que na versão final do tutorial, eu desativei a escala de vídeo 
  através da remoção do parâmetro 'auto', como a minha intenção era ter que montar meu template html.

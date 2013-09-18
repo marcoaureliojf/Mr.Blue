@@ -1,15 +1,5 @@
 var parcial = 0;
 var habilidades = new Array();
-var joystick = new VirtualJoystick({
-    container: document.body,
-    strokeStyle: 'cyan'
-});
-joystick.addEventListener('touchStartValidation', function(event) {
-    var touch = event.changedTouches[0];
-    if (touch.pageX < window.innerWidth / 2)
-        return false;
-    return true
-});
 
 game.MudarNivel = me.LevelEntity.extend({
     init: function(x, y, settings) {
@@ -98,7 +88,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
             this.vel.x = 0;
         }
 
-        if (me.input.isKeyPressed('jump')) {
+        if (me.input.isKeyPressed('jump') || joystick.up()) {
             if (habilidades[0] === "salto duplo") {
                 this.jumping = true;
 

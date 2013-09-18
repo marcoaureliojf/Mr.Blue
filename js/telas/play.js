@@ -38,7 +38,6 @@ game.PlayScreen = me.ScreenObject.extend({
         me.levelDirector.loadLevel(level);
         me.game.sort();
         this.changeLevel();
-
         return true;
     },
     getNivel: function() {

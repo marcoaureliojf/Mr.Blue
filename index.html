@@ -7,7 +7,7 @@
         <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <!--        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
     </head>
     <body>
         <!-- Canvas placeholder -->
@@ -30,18 +30,12 @@
         <script type="text/javascript" src="js/telas/play.js"></script>
 
         <!-- Virtual JoyPad -->
-        <script src='virtualjoystick.js'></script>
+        <script type="text/javascript" src='js/virtualjoystick.js'></script>
+        <script type="text/javascript" src='js/joypad.js'></script>
 
         <!-- Bootstrap & Mobile optimization tricks -->
         <script type="text/javascript">
             window.onReady(function onReady() {
-                //Scoreoid proxy
-                $.post('scoreoid_proxy.php', {action: 'curl_request', method: 'getScores)', response: 'JSON'},
-                function(data) {
-                    alert("Data Loaded: " + data);
-                    console.log("Data Loaded: " + data);
-                });
-
                 game.onload();
 
                 // Mobile browser hacks

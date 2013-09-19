@@ -10,7 +10,6 @@ game.resources = [
     {name: "metatiles32x32", type: "image", src: "data/img/map/metatiles32x32.png"},
     // nosso player 1
     {name: "justin_direita", type: "image", src: "data/img/sprite/justin_direita.png"},
-    {name: "AnimeMarioBoss", type: "image", src: "data/img/sprite/AnimeMarioBoss.png"},
     {name: "justin_mortal", type: "image", src: "data/img/sprite/justin_mortal.png"},
     // nossas moedas
     {name: "spinning_coin_gold", type: "image", src: "data/img/sprite/spinning_coin_gold.png"},

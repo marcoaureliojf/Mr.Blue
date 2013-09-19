@@ -5,6 +5,8 @@
 var game = {
     // Executa ao carregar a página.
     "onload": function() {
+    	me.sys.fps = 50;
+    	me.sys.preRender = true;
         // Initialize the video.
         if (!me.video.init("screen", 640, 480, true, 'auto')) {
             alert("Ops, melhor voce atualizar seu navegador. Este não suporta canvas HTML5");

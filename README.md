@@ -8,7 +8,5 @@ Instruções:
 
 Direita, Esquerda : Setas direcionais do teclaado.
 Pular : Tecla de espaço.
-
-Jogar online: www.bluefestasjf.hol.es/game
 ---------------------------
  
